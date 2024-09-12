@@ -1,0 +1,52 @@
+Sub sort
+
+dim sheet
+dim cellrange
+REM dim SortFields(0) as New com.sun.star.util.SortField
+dim SortFields(1) as New com.sun.star.util.SortField
+dim SortDesc(0)as new com.sun.star.beans.PropertyValue
+
+sheet = ThisComponent.Sheets.getByName("Sheet1")
+rem cellrange = sheet.getcellrangebyname("A1:C5")
+cellrange = sheet.getCellRangeByName("A1:C5")
+
+
+SortFields(0).Field = 1
+SortFields(0).SortAscending = TRUE
+
+SortFields(1).Field = 0
+SortFields(1).SortAscending = TRUE
+
+SortDesc(0).Name = "SortFields"
+SortDesc(0).Value = SortFields()
+CellRange.Sort(SortDesc())
+
+End Sub
+
+
+
+
+
+
+
+
+
+Function sumofallsheets()
+	Rem-----all variables
+	Dim sum as double
+	dim i as integer
+	dim sheets 
+	dim sheet 
+	dim cell
+	
+	rem-----start of loop
+	sheets = thiscomponent.getsheets()
+	for i= 0 to sheets.getcount() -1 rem-----> get no.of sheets
+		sheet = sheets.getbyindex(i) rem -----> get loop number/sheet no	
+		cell = sheet.getcellbyposition(0,0) rem----> get cell positon
+		MsgBox " Sheet Number: " & i+1 & ", Cell(0,0) :" & cell.getvalue()
+		sum = sum + cell.getvalue() rem-----> add value to sum to finaly get answer
+		MsgBox "sum: " & sum
+	next
+	sumofallsheets = sum rem------>final answer
+end function	
